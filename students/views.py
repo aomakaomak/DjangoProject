@@ -1,21 +1,9 @@
-from ctypes.wintypes import HHOOK
+
 
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# def example_view(request):
-#     return render(request, 'app/example.html')
-#
-# def show_data(request):
-#     if request.method == 'GET':
-#         return render(request, 'app/show_data.html')
-#
-# def submit_data(request):
-#     if request.method == 'POST':
-#         return HttpResponse('Данные отправлены')
-#
-# def show_item(request, item_id):
-#     return render(request, 'app/item.html', {'item_id': item_id})
+from students.models import Student
 
 
 def about(request):
@@ -28,3 +16,18 @@ def contact(request):
         message = request.POST.get('message')
         return HttpResponse(f'{name}, спасибо за сообщение')
     return render(request, 'students/contact.html')
+
+def index(request):
+    student = Student.objects.get(id=1)
+    context = {
+        'student_name': f'{student.first_name} {student.last_name}',
+        'student_year': student.get_year_display(),
+    }
+    return render(request, 'students/index.html', context=context)
+
+def student_detail(request):
+    student = Student.objects.get(id=1)
+    context = {
+        'student': student,
+    }
+    return render(request, 'students/student_detail.html', context=context)
