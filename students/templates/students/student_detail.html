@@ -1,3 +1,26 @@
+{% extends 'students/base.html' %}
+
+{% block title %}Список студентов{% endblock %}
+
+{% block content %}
+{% include 'students/header.html' %}
+<h2>Инфо о студенте</h2>
+
+
+<p>Имя {{ student.first_name|upper }}</p>
+<p>Фамилия {{ student.last_name|lower }}</p>
+<p>Курс {{ student.get_year_display }}</p>
+<p>Дата рождения {{ student.birth_date|date:"d M Y" }}</p>
+<p>Комментарий {{ student.comment|default:"Комментарий отсутствует"}}</p>
+<p>Описание {{ student.get_year_display|truncatechars:10 }}</p>
+<!--    <p>Фотографии: <img src="{{ student.photo.url }}"></p>-->
+
+{% endblock %}
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
