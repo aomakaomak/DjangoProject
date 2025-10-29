@@ -1,17 +1,17 @@
 {% extends 'library/base.html' %}
 
-{% block title %}О книге {{book.title}}{% endblock %}
+{% block title %}Форма книги{{book.title}}{% endblock %}
 
 {% block content %}
 {% include 'library/header.html' %}
 
-<h1>{{book.title}}</h1>
-<p>Автор: {{ book.author.first_name }} {{ book.author.last_name }}</p>
-<p>Дата публикации: {{ book.publication_date|date:"d M Y" }}</p>
-
-<a href="{% url 'library:book_update' book.pk %}" class="btn btn-secondary">Редактировать</a>
-<a href="{% url 'library:book_delete' book.pk %}" class="btn btn-danger">Удалить</a>
-<a href="{% url 'library:books_list' %}" class="btn btn-primary">Вернуться к списку</a>
+<h2>Форма для книги</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'library:books_list' %}" class="btn btn-primary">Отменить</a>
+</form>
 
 {% endblock %}
 
