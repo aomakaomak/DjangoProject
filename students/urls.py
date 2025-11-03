@@ -16,6 +16,8 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('student_detail/<int:student_id>/', views.student_detail, name='student_detail'),
     path('student_list/', views.student_list, name='student_list'),
+    path('create/', views.StudentCreateView.as_view(), name='student_create'),
+    path('update/<int:pk>/', views.StudentUpdateView.as_view(), name='student_update'),
 
     path('mymodel/list/', views.MyModelListView.as_view(), name='mymodel_list'),
     path('mymodel/create/', views.MyModelCreateView.as_view(), name='mymodel_create'),

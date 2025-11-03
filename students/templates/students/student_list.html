@@ -14,7 +14,7 @@
         {% elif student.year == 'third' %} list-group-item-warning
         {% elif student.year == 'fourth' %} list-group-item-danger
         {% endif %}">
-        {{ student.first_name }} {{ student.last_name }}
+        <a href="{% url 'students:student_detail' student.pk %}">{{ student.first_name }} {{ student.last_name }}</a>
         <span class="badge text-bg-primary rounded-pill">
             {% if student.year == 'first' %}
                 Первый курс
