@@ -16,7 +16,7 @@ from pathlib import Path
 
 load_dotenv(override=True)
 
-from django.conf.global_settings import STATICFILES_DIRS, MEDIA_URL, AUTH_USER_MODEL
+from django.conf.global_settings import STATICFILES_DIRS, MEDIA_URL, AUTH_USER_MODEL, LOGIN_REDIRECT_URL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -142,3 +142,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'spbteplicy001@yandex.ru'
+EMAIL_HOST_PASSWORD = 'eqinmrknygrgsiwx'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGIN_REDIRECT_URL = 'library:books_list'
+LOGIN_URL = 'users:login'
