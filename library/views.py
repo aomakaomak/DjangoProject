@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from .models import Author, Book
 from .forms import AuthorForm, BookForm
@@ -29,24 +29,26 @@ class AuthorUpdateView(UpdateView):
     success_url = reverse_lazy('library:authors_list')
 
 
-class BookListView(ListView):
+class BookListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Book
     template_name = 'library/books_list.html'
     context_object_name = 'books'
+    permission_required = 'library.view_book'
 
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(publication_date__year__gt=1900)
 
 
-class BookCreateView(LoginRequiredMixin, CreateView):
+class BookCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Book
     form_class = BookForm
     template_name = 'library/book_form.html'
     success_url = reverse_lazy('library:books_list')
+    permission_required = 'library.add_book'
 
 
-class BookDetailView(DetailView):
+class BookDetailView(LoginRequiredMixin, DetailView):
     model = Book
     template_name = 'library/book_detail.html'
     context_object_name = 'book'
@@ -59,17 +61,19 @@ class BookDetailView(DetailView):
         return context
 
 
-class BookUpdateView(LoginRequiredMixin, UpdateView):
+class BookUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Book
     form_class = BookForm
     template_name = 'library/book_form.html'
     success_url = reverse_lazy('library:books_list')
+    permission_required = 'library.change_book'
 
 
-class BookDeleteView(DeleteView):
+class BookDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Book
     template_name = 'library/book_confirm_delete.html'
     success_url = reverse_lazy('library:books_list')
+    permission_required = 'library.delete_book'
 
 # def books_list(request):
 #     books = Book.objects.all()
