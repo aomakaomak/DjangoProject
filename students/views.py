@@ -7,9 +7,20 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
+from django.core.cache import cache
 
 from students.forms import StudentForm
 from students.models import Student, MyModel
+
+
+def my_view(request):
+    data = cache.get('my_key')
+
+    if not data:
+        data = 'some expensive computation'
+        cache.set('my_key', data, 60 * 15)
+
+    return HttpResponse(data)
 
 
 class PromoteStudentView(LoginRequiredMixin, View):
