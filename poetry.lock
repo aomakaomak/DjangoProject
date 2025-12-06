@@ -5,7 +5,7 @@ name = "asgiref"
 version = "3.10.0"
 description = "ASGI specs, helper code, and adapters"
 optional = false
-python-versions = ">=3.9,<4.0"
+python-versions = ">=3.9"
 groups = ["main"]
 files = [
     {file = "asgiref-3.10.0-py3-none-any.whl", hash = "sha256:aef8a81283a34d0ab31630c9b7dfe70c812c95eba78171367ca8745e88124734"},
@@ -582,5 +582,5 @@ files = [
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.13"
-content-hash = "184113e8ed9b091c2484ffd48e1e388e5ff0aacf17332a4b899cf6259a73e41c"
+python-versions = ">=3.13,<4.0"
+content-hash = "82f5edf97a7cc318987c71ec7c3587dc244e86aca84e58831ad0bdea31924a16"
